@@ -73,11 +73,10 @@ export class ExamplesComponent implements OnInit, AfterViewInit {
       code: {
         js: {
           code: `
-          import { Comparator } from '@epiclabs/epic-video-comparator';
-          ...
           var comparatorConfig = {
             leftUrl: 'https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd',
             rightUrl: 'https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd',
+            autoplay: false,
           };
 
           var comparatorContainer = document.getElementById('example-0-comparator-container');
@@ -109,35 +108,43 @@ export class ExamplesComponent implements OnInit, AfterViewInit {
       },
       playerContainerId: 'example-0-comparator-container',
       title: 'Basic example',
-    }, {
+    },
+    {
       codeMode: false,
       code: {
         js: {
           code: `
-          import { Comparator } from '@epiclabs/epic-video-comparator';
-          ...
+          var comparator;
+
+          function play() {
+            comparator.play();
+          }
+
+          function pause() {
+            comparator.pause();
+          }
+
           var comparatorConfig = {
             autoplay: false,
             leftUrl: 'https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd',
             rightUrl: 'https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd',
-            stats: {
-              showDuration: false,
-              showResolution: false,
-              showVideoCodec: false,
-              showAudioCodec: false,
-              showBuffered: false
-            }
+            stats: false,
+            mediaControls: false,
           };
 
-          var comparatorContainer = document.getElementById('example-0-comparator-container');
+          var comparatorContainer = document.getElementById('example-1-comparator-container');
 
-          var comparator = new Comparator(comparatorConfig, comparatorContainer);
+          comparator = new Comparator(comparatorConfig, comparatorContainer);
           `,
           language: 'js',
           linenums: false,
         },
         html: {
-          code: '<div id="example-0-comparator-container"></div>',
+          code: `
+          <div id="example-1-comparator-container"></div>
+          <button onclick="play()">play</button>
+          <button onclick="pause()">pause</button>
+          `,
           language: 'html',
           linenums: false,
         },
@@ -160,7 +167,8 @@ export class ExamplesComponent implements OnInit, AfterViewInit {
       },
       playerContainerId: 'example-1-comparator-container',
       title: 'Custom controls',
-    }, {
+    },
+    {
       codeMode: false,
       code: {
         js: {
@@ -169,19 +177,24 @@ export class ExamplesComponent implements OnInit, AfterViewInit {
             autoplay: false,
             leftUrl: 'https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd',
             rightUrl: 'https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd',
-            stats: false,
-            mediaControls: false,
+            stats: {
+              custom: true,
+            },
           };
 
-          var comparatorContainer = document.getElementById('example-0-comparator-container');
+          var comparatorContainer = document.getElementById('example-2-comparator-container');
 
           var comparator = new Comparator(comparatorConfig, comparatorContainer);
+
+          setInterval(function() {
+            comparator.updateStats('LEFT: ' + new Date().getSeconds(), 'RIGHT: ' + new Date().getSeconds());
+          }, 1000);
           `,
           language: 'js',
           linenums: false,
         },
         html: {
-          code: '<div id="example-0-comparator-container"></div><br><p onclick="play()">play</p>',
+          code: '<div id="example-2-comparator-container"></div>',
           language: 'html',
           linenums: false,
         },
