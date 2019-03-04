@@ -1,0 +1,20 @@
+dist: trusty
+
+language: node_js
+
+node_js:
+  - stable
+
+before_script:
+  - npm install
+
+script:
+  - npm run build && npm t
+
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/
+  on:
+    branch: dev

@@ -1,0 +1,30 @@
+<mat-card class="example-card mt-2" *ngFor="let example of examples; let i = index">
+  <mat-card-header class="w-100">
+    <mat-card-title class="d-flex space-between">
+      <div>{{example.title}}</div>
+      <div><mat-icon class="cursor-pointer" (click)="toggleCodeMode(i)"  [matTooltip]="example.codeMode === false ? 'Show code' : 'Show example'">code</mat-icon></div>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <ng-container *ngIf="example.codeMode === false; else codeModeTemplate">
+      <div [attr.id]="example.playerContainerId"></div>
+      <ng-container *ngIf="i === 1">
+        <button mat-button (click)="play(i)">play</button>
+        <button mat-button (click)="pause(i)">pause</button>
+      </ng-container>
+    </ng-container>
+    <ng-template #codeModeTemplate>
+      <mat-tab-group>
+        <mat-tab label="HTML">
+          <app-code-example [config]="example.code.html"></app-code-example>
+        </mat-tab>
+        <mat-tab label="JS">
+          <app-code-example [config]="example.code.js"></app-code-example>
+        </mat-tab>
+        <mat-tab label="CSS">
+          <app-code-example [config]="example.code.css"></app-code-example>
+        </mat-tab>
+      </mat-tab-group>
+    </ng-template>
+  </mat-card-content>
+</mat-card>

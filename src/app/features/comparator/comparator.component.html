@@ -1,0 +1,29 @@
+<div class="comparator-component-wrapper">
+  <h1>Insert your video URLs</h1>
+  <mat-card class="comparator-card mt-2">
+    <mat-card-content>
+      <form [formGroup]="urlsForm">
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Left video URL" formControlName="leftUrl">
+        </mat-form-field>
+      
+        <mat-form-field class="w-100">
+          <input matInput placeholder="Right video URL" formControlName="rightUrl">
+        </mat-form-field>
+
+        <button mat-raised-button (click)="reloadComparator()">Load</button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+
+  <h1>Compare both videos</h1>
+  <mat-card class="comparator-card mt-2">
+    <mat-card-content>
+      <div id="comparator-container"></div>
+    </mat-card-content>
+  </mat-card>
+
+  <h1>Use it in your projects!</h1>
+  <a href="https://github.com/epiclabs-io/epic-video-comparator" target="_blank" mat-button>GitHub</a>
+  <a href="https://www.npmjs.com/package/@epiclabs/epic-video-comparator" target="_blank" mat-button>npm</a>
+</div>
