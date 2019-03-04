@@ -7,12 +7,14 @@ node_js:
 
 before_script:
   - npm install
-  - npm install -g angular-cli-ghpages
 
 script:
   - ng build --prod --base-href /epic-video-comparator-demo/ && npm t
 
-after_success:
-  - if [ "$TRAVIS_BRANCH" = "dev" ]; then
-      angular-cli-ghpages --repo=https://GH_TOKEN@github.com/epiclabs-io/epic-video-comparator-demo.git --name="New release" --email=adrian@epiclabs.io;
-    fi
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local_dir: dist/
+  on:
+    branch: dev

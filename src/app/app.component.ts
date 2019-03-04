@@ -1,5 +1,5 @@
+import { AfterViewInit, Component } from '@angular/core';
 import { routerTransition } from '@app/core/animations/router.transition';
-import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -7,7 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss'],
   animations: [routerTransition],
 })
-export class AppComponent {
+export class AppComponent implements AfterViewInit {
   year = (new Date).getFullYear();
 
   socialNetworks = [
@@ -30,4 +30,14 @@ export class AppComponent {
       url: 'https://www.linkedin.com/company/epiclabs-io/',
     }
   ];
+
+  ngAfterViewInit() {
+    console.log('%c Coded with %c♥️ %cby %cepic%c>%clabs',
+      'background: #000; color: #fff; line-height: 35px; padding: 10px 0 10px 20px;',
+      'background: #000; color: #f00; font-weight: bold; line-height: 35px; padding: 10px 0;',
+      'background: #000; color: #fff; font-weight: normal; line-height: 35px; padding: 10px 0;',
+      'background: #000; color: #fff; font-weight: bold; line-height: 35px; padding: 10px 0;',
+      'background: #000; color: #fad000; font-weight: bold; line-height: 35px; padding: 10px 0;',
+      'background: #000; color: #80bd01; font-weight: bold; line-height: 35px; padding: 10px 20px 10px 0;');
+  }
 }

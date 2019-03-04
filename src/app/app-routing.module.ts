@@ -4,11 +4,6 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: '/comparator',
-    pathMatch: 'full'
-  },
-  {
-    path: 'comparator',
     loadChildren: 'app/features/comparator/comparator.module#ComparatorModule',
   },
   {
