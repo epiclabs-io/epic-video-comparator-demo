@@ -24,7 +24,7 @@
     "@angular/platform-browser": "7.2.7",
     "@angular/platform-browser-dynamic": "7.2.7",
     "@angular/router": "7.2.7",
-    "@epiclabs/epic-video-comparator": "0.0.2",
+    "@epiclabs/epic-video-comparator": "0.0.4",
     "@eriice/pretty-code": "0.0.19",
     "angular-font-awesome": "3.1.2",
     "core-js": "2.6.5",
