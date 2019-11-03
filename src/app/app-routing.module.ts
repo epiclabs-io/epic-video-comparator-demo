@@ -4,11 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    loadChildren: 'app/features/comparator/comparator.module#ComparatorModule',
+    loadChildren: () => import('app/features/comparator/comparator.module').then(m => m.ComparatorModule),
   },
   {
     path: 'examples',
-    loadChildren: 'app/features/examples/examples.module#ExamplesModule',
+    loadChildren: () => import('app/features/examples/examples.module').then(m => m.ExamplesModule),
   },
 ];
 
