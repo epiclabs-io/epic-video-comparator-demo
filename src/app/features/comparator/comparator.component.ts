@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { OnInit, AfterViewInit, Component, OnDestroy } from '@angular/core';
 import { Comparator, IComparatorConfig } from '@epiclabs/epic-video-comparator';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
@@ -32,10 +33,23 @@ export class ComparatorComponent implements OnInit, AfterViewInit, OnDestroy {
   comparatorConfig: IComparatorConfig;
   urlsForm: FormGroup;
 
-  constructor() {
+  leftUrl: string;
+  rightUrl: string;
+
+  constructor(private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit() {
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['left'] || params['right']) {
+        this.leftUrl = params['left'] || '';
+        this.rightUrl = params['right'] || '';
+      } else {
+        this.leftUrl = 'https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd';
+        this.rightUrl = 'https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd';
+      }
+    });
+
     this.initForm();
   }
 
@@ -56,10 +70,24 @@ export class ComparatorComponent implements OnInit, AfterViewInit, OnDestroy {
     this.initPlayer();
   }
 
+  public shareLink(): void {
+    /* Get the text field */
+    const leftUrl = this.urlsForm.get('leftUrl').value;
+    const rightUrl = this.urlsForm.get('rightUrl').value;
+    const shareUrl = `${window.location.href.split('?')[0]}?left=${leftUrl}&right=${rightUrl}`;
+    const cb = document.getElementById('cb') as HTMLInputElement;
+
+    cb.value = shareUrl;
+    cb.select();
+    cb.setSelectionRange(0, cb.value.length); /*For mobile devices*/
+
+    document.execCommand('copy');
+  }
+
   private initForm(): void {
     this.urlsForm = new FormGroup({
-      leftUrl: new FormControl('https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd', Validators.required),
-      rightUrl: new FormControl('https://demo.unified-streaming.com/video/tears-of-steel/tears-of-steel.ism/.mpd', Validators.required),
+      leftUrl: new FormControl(this.leftUrl, Validators.required),
+      rightUrl: new FormControl(this.rightUrl, Validators.required),
     });
   }
 
