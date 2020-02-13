@@ -3,7 +3,7 @@ dist: trusty
 language: node_js
 
 node_js:
-  - 12
+  - stable
 
 before_script:
   - npm install
@@ -13,8 +13,8 @@ script:
 
 deploy:
   provider: pages
-  cleanup: true
-  token: $GITHUB_TOKEN
+  skip_ cleanup: true
+  github_token: $GITHUB_TOKEN
   local_dir: dist/
   on:
     branch: dev
