@@ -45,3 +45,9 @@ footer .copyright {
   color: lightgray;
   font-size: .8em;
 }
+
+::ng-deep .cb-snack-panel {
+  .mat-simple-snackbar {
+    justify-content: center;
+  }
+}

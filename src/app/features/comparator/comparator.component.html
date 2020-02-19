@@ -13,7 +13,7 @@
 
         <button mat-raised-button (click)="reloadComparator()" [disabled]="!urlsForm.get('leftUrl').value || !urlsForm.get('rightUrl').value">Load</button>
         <button mat-raised-button class="ml-2" (click)="shareLink()" [disabled]="!urlsForm.get('leftUrl').value || !urlsForm.get('rightUrl').value">Share link</button>
-        <input type="text" id="cb" length="0">
+        <input #cbInput type="text" length="0" class="cb-input">
       </form>
     </mat-card-content>
   </mat-card>

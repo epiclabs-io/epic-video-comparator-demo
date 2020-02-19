@@ -1,7 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
-import { OnInit, AfterViewInit, Component, OnDestroy } from '@angular/core';
+import { OnInit, AfterViewInit, Component, OnDestroy, ViewChild, ElementRef } from '@angular/core';
 import { Comparator, IComparatorConfig } from '@epiclabs/epic-video-comparator';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material';
 
 interface IPrettyCodeConfig {
   code: string;
@@ -36,7 +37,11 @@ export class ComparatorComponent implements OnInit, AfterViewInit, OnDestroy {
   leftUrl: string;
   rightUrl: string;
 
-  constructor(private activatedRoute: ActivatedRoute) {
+  @ViewChild('cbInput', {static: false}) cbInputRef: ElementRef<HTMLInputElement>;
+
+  constructor(private activatedRoute: ActivatedRoute,
+              private snackBar: MatSnackBar) {
+    // nothing to see here
   }
 
   ngOnInit() {
@@ -75,13 +80,23 @@ export class ComparatorComponent implements OnInit, AfterViewInit, OnDestroy {
     const leftUrl = this.urlsForm.get('leftUrl').value;
     const rightUrl = this.urlsForm.get('rightUrl').value;
     const shareUrl = `${window.location.href.split('?')[0]}?left=${leftUrl}&right=${rightUrl}`;
-    const cb = document.getElementById('cb') as HTMLInputElement;
+    const cbInputElement = this.cbInputRef.nativeElement;
 
-    cb.value = shareUrl;
-    cb.select();
-    cb.setSelectionRange(0, cb.value.length); /*For mobile devices*/
+    cbInputElement.value = shareUrl;
+    cbInputElement.select();
+    cbInputElement.setSelectionRange(0, cbInputElement.value.length); /*For mobile devices*/
 
-    document.execCommand('copy');
+    const snackBarConfig = {
+      duration: 3000,
+      panelClass: 'cb-snack-panel',
+    };
+
+    try {
+      document.execCommand('copy');
+      this.snackBar.open('Copied to clipboard!', null, snackBarConfig);
+    } catch (err) {
+      this.snackBar.open('Unable to copy to clipboard', null, snackBarConfig);
+    }
   }
 
   private initForm(): void {
