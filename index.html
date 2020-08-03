@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Epic Video Comparator</title>
+  <base href="/epic-video-comparator-demo/">  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="assets/img/epic-labs-icon-32x32.png" sizes="32x32" />
+  <link rel="icon" href="assets/img/epic-labs-icon-192x192.png" sizes="192x192" /> 
+  <link rel="apple-touch-icon-precomposed" href="assets/img/epic-labs-icon-180x180.png" />
+  <link rel="apple-touch-icon" href="assets/img/epic-labs-icon-180x180.png" />
+  <meta name="msapplication-TileImage" content="assets/img/epic-labs-icon-270x270.png" />
+  <link rel="shortcut icon" sizes="16x16 24x24 32x32 48x48" href="assets/img/epic-labs-icon-32x32.png">
+  <meta name="viewport" content="width=700, user-scalable=yes" />
+  <style type="text/css">
+    body, html {
+      height: 100%;
+    }
+    .app-loading {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+    }
+    .app-loading .spinner {
+      height: 200px;
+      width: 200px;
+      animation: rotate 2s linear infinite;
+      transform-origin: center center;
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      margin: auto;
+    }
+    .app-loading .spinner .path {
+      stroke-dasharray: 1, 200;
+      stroke-dashoffset: 0;
+      animation: dash 1.5s ease-in-out infinite;
+      stroke-linecap: round;
+      stroke: #ddd;
+    }
+    @keyframes rotate {
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+    @keyframes dash {
+      0% {
+        stroke-dasharray: 1, 200;
+        stroke-dashoffset: 0;
+      }
+      50% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -35px;
+      }
+      100% {
+        stroke-dasharray: 89, 200;
+        stroke-dashoffset: -124px;
+      }
+    }
+  </style>
+<link rel="stylesheet" href="styles.91d91bc059f92cb57e22.css"></head>
+<body>
+  <app-root>
+    <div class="app-loading">
+      <svg class="spinner" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+      </svg>
+    </div>
+  </app-root>
+<script src="runtime-es2015.9e3ce16ceda65c6e2d42.js" type="module"></script><script src="runtime-es5.9e3ce16ceda65c6e2d42.js" nomodule defer></script><script src="polyfills-es5.aee75c3ada33dd498593.js" nomodule defer></script><script src="polyfills-es2015.413dd88380ca0b5b1b63.js" type="module"></script><script src="main-es2015.61f7f05b86374f4ccab5.js" type="module"></script><script src="main-es5.61f7f05b86374f4ccab5.js" nomodule defer></script></body>
+</html>
